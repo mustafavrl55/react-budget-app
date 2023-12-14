@@ -1,8 +1,9 @@
 "use client";
 import { MyContext } from "@/context/my-context";
 import { useContext } from "react";
-
-import Chart from "react-apexcharts";
+import dynamic from "next/dynamic";
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+//import Chart from "react-apexcharts";
 
 export default function Statictis() {
   const { items } = useContext(MyContext);
@@ -10,47 +11,42 @@ export default function Statictis() {
   const options = {
     chart: {
       height: 350,
-      type: 'line',
+      type: "line",
       zoom: {
-        enabled: false
-      }
+        enabled: false,
+      },
     },
     dataLabels: {
-      enabled: false
+      enabled: false,
     },
     stroke: {
-      curve: 'straight'
+      curve: "straight",
     },
     title: {
-      text: 'Product Trends by Month',
-      align: 'left'
+      text: "Product Trends by Month",
+      align: "left",
     },
     grid: {
       row: {
-        colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        opacity: 0.5
+        colors: ["#f3f3f3", "transparent"], // takes an array which will be repeated on columns
+        opacity: 0.5,
       },
     },
     xaxis: {
-      categories: items.map(item => item.itemDate),
-    }
+      categories: items.map((item) => item.itemDate),
+    },
   };
 
-  const  series = [{
-    name: "Desktops",
-    data: items.map(item => item.itemPrice)
-}];
-console.log(items)
+  const series = [
+    {
+      name: "Desktops",
+      data: items.map((item) => item.itemPrice),
+    },
+  ];
+  console.log(items);
   return (
     <div id="chart" className=" pt-24">
-      <Chart
-        options={options}
-        series={series}
-        type="line"
-        height={350}
-      />
+      <Chart  options={options} series={series} type="line" height={350} width="100%" />
     </div>
   );
 }
-
-
