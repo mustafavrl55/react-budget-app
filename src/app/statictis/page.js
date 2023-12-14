@@ -2,12 +2,12 @@
 import { MyContext } from "@/context/my-context";
 import { useContext } from "react";
 import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-//import Chart from "react-apexcharts";
+//const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
+import Chart from "react-apexcharts";
 
 export default function Statictis() {
   const { items } = useContext(MyContext);
-console.log(items)
+
   const options = {
     chart: {
       height: 350,
