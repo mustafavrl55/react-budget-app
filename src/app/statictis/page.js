@@ -7,7 +7,7 @@ const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
 
 export default function Statictis() {
   const { items } = useContext(MyContext);
-
+console.log(items)
   const options = {
     chart: {
       height: 350,
